@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Elevate Media Labs - Estrategia & Data Intelligence. Transformamos datos en inteligencia accionable para marcas que buscan crecer con propósito.">
+    <meta name="keywords" content="estrategia, data intelligence, marketing, publicidad, comunicación, eventos">
+    <meta name="author" content="Elevate Media Labs">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Elevate Media Labs - Estrategia & Data Intelligence">
+    <meta property="og:description" content="Decisiones que combinan análisis y creatividad.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 80L140 260L256 240Z' fill='%23a855f7'/%3E%3Cpath d='M256 240L140 260L180 340L256 300Z' fill='%236b21a8'/%3E%3Cpath d='M256 80L372 260L256 240Z' fill='%2394a3b8'/%3E%3Cpath d='M256 240L372 260L332 340L256 300Z' fill='%23475569'/%3E%3Cline x1='256' y1='80' x2='256' y2='300' stroke='white' stroke-width='8'/%3E%3Cpath d='M216 305L236 290L276 290L296 305L296 335L276 350L236 350L216 335Z' stroke='%2322d3ee' stroke-width='3' fill='none'/%3E%3Ccircle cx='256' cy='320' r='4' fill='%2322d3ee'/%3E%3C/svg%3E">
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles/style.css">
+    
+    <title>Elevate Media Labs | Estrategia & Data Intelligence</title>
+</head>
+<body>
+    
+    <!-- PARTICLES BACKGROUND -->
+    <div id="tsparticles"></div>
+    
+    <!-- ANIMATED BACKGROUND -->
+    <div class="animated-background">
+        <!-- Grid tecnológico sutil -->
+        <div class="tech-grid"></div>
+        
+        <!-- Hexágonos flotantes minimalistas -->
+        <div class="tech-hex tech-hex-1"></div>
+        <div class="tech-hex tech-hex-2"></div>
+    </div>
+    
+    <!-- NAVIGATION / HEADER -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <!-- Logo -->
+            <a href="#hero" class="nav-logo">
+                <svg class="logo-icon" width="36" height="36" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Flecha superior izquierda (morado) -->
+                    <path d="M256 80 L140 260 L256 240 Z" fill="url(#gradient-purple-1)"/>
+                    <path d="M256 240 L140 260 L180 340 L256 300 Z" fill="url(#gradient-purple-2)"/>
+                    
+                    <!-- Flecha superior derecha (gris) -->
+                    <path d="M256 80 L372 260 L256 240 Z" fill="url(#gradient-gray-1)"/>
+                    <path d="M256 240 L372 260 L332 340 L256 300 Z" fill="url(#gradient-gray-2)"/>
+                    
+                    <!-- Línea divisoria blanca -->
+                    <line x1="256" y1="80" x2="256" y2="300" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    
+                    <!-- Circuito inferior (cyan) -->
+                    <g transform="translate(256, 320)">
+                        <!-- Circuito central hexagonal -->
+                        <path d="M -40,-15 L -20,-30 L 20,-30 L 40,-15 L 40,15 L 20,30 L -20,30 L -40,15 Z" 
+                              stroke="#22d3ee" stroke-width="3" fill="none"/>
+                        
+                        <!-- Nodos internos -->
+                        <circle cx="-15" cy="-10" r="3" fill="#22d3ee"/>
+                        <circle cx="15" cy="-10" r="3" fill="#22d3ee"/>
+                        <circle cx="-15" cy="10" r="3" fill="#22d3ee"/>
+                        <circle cx="15" cy="10" r="3" fill="#22d3ee"/>
+                        <circle cx="0" cy="0" r="4" fill="#22d3ee"/>
+                        
+                        <!-- Líneas de circuito externas izquierda -->
+                        <path d="M -40,0 L -60,0 L -70,10" stroke="#22d3ee" stroke-width="2.5" fill="none"/>
+                        <path d="M -70,10 L -75,20" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <path d="M -70,10 L -80,15" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <circle cx="-75" cy="20" r="2.5" fill="#22d3ee"/>
+                        <circle cx="-80" cy="15" r="2.5" fill="#22d3ee"/>
+                        
+                        <!-- Líneas de circuito externas derecha -->
+                        <path d="M 40,0 L 60,0 L 70,10" stroke="#22d3ee" stroke-width="2.5" fill="none"/>
+                        <path d="M 70,10 L 75,20" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <path d="M 70,10 L 80,15" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <circle cx="75" cy="20" r="2.5" fill="#22d3ee"/>
+                        <circle cx="80" cy="15" r="2.5" fill="#22d3ee"/>
+                        
+                        <!-- Líneas de circuito inferiores -->
+                        <path d="M -20,30 L -25,45 L -30,55" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <path d="M 0,32 L 0,50" stroke="#22d3ee" stroke-width="2.5" fill="none"/>
+                        <path d="M 20,30 L 25,45 L 30,55" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        
+                        <circle cx="-30" cy="55" r="2.5" fill="#22d3ee"/>
+                        <circle cx="0" cy="50" r="3" fill="#22d3ee"/>
+                        <circle cx="30" cy="55" r="2.5" fill="#22d3ee"/>
+                        
+                        <!-- Líneas superiores al hexágono -->
+                        <path d="M -20,-30 L -25,-45" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <path d="M 20,-30 L 25,-45" stroke="#22d3ee" stroke-width="2" fill="none"/>
+                        <circle cx="-25" cy="-45" r="2.5" fill="#22d3ee"/>
+                        <circle cx="25" cy="-45" r="2.5" fill="#22d3ee"/>
+                    </g>
+                    
+                    <defs>
+                        <linearGradient id="gradient-purple-1" x1="140" y1="80" x2="256" y2="260" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#b794f6"/>
+                            <stop offset="100%" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                        <linearGradient id="gradient-purple-2" x1="140" y1="260" x2="256" y2="340" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#8b5cf6"/>
+                            <stop offset="100%" stop-color="#6b21a8"/>
+                        </linearGradient>
+                        <linearGradient id="gradient-gray-1" x1="372" y1="80" x2="256" y2="260" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#94a3b8"/>
+                        </linearGradient>
+                        <linearGradient id="gradient-gray-2" x1="372" y1="260" x2="256" y2="340" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#94a3b8"/>
+                            <stop offset="100%" stop-color="#475569"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Elevate</span>
+            </a>
+            
+            <!-- Navigation Menu -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#servicios" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#nosotros" class="nav-link">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#casos" class="nav-link">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                
+                <!-- CTA Button en el menú móvil -->
+                <div class="nav-cta-mobile">
+                    <a href="#contacto" class="btn btn-primary">Hablemos</a>
+                </div>
+            </div>
+            
+            <!-- CTA Button Desktop -->
+            <div class="nav-cta">
+                <a href="#contacto" class="btn btn-primary btn-nav">Hablemos</a>
+            </div>
+            
+            <!-- Hamburger Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Logo/Brand -->
+                <div class="hero-brand animate-on-scroll">
+                    <h1 class="hero-title">
+                        Elevate<br>
+                        Media Labs
+                    </h1>
+                </div>
+                
+                <!-- Tagline -->
+                <div class="hero-tagline animate-on-scroll">
+                    <p class="tagline-main">Estrategia & Data Intelligence</p>
+                </div>
+                
+                <!-- Propuesta de Valor -->
+                <div class="hero-description animate-on-scroll">
+                    <p class="description-highlight">
+                        Decisiones que combinan análisis y creatividad.
+                    </p>
+                    <p class="description-text">
+                        Interpretamos el comportamiento de las audiencias para diseñar estrategias que generan impacto real. 
+                        Transformamos datos en inteligencia accionable para marcas que buscan crecer con propósito.
+                    </p>
+                </div>
+                
+                <!-- CTA -->
+                <div class="hero-cta animate-on-scroll">
+                    <a href="#contacto" class="btn btn-primary">Hablemos</a>
+                    <a href="#servicios" class="btn btn-secondary">Ver Servicios</a>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator">
+                    <span class="scroll-text">Scroll</span>
+                    <div class="scroll-line"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Background Decoration -->
+        <div class="hero-bg-decoration"></div>
+    </section>
+    
+    <!-- SERVICIOS SECTION -->
+    <section id="servicios" class="section servicios">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Nuestros Servicios</span>
+                <h2 class="section-title">Impulsamos tu marca<br>con inteligencia y propósito</h2>
+                <p class="section-description">
+                    Soluciones integrales que combinan estrategia, data y creatividad para conectar con audiencias reales.
+                </p>
+            </div>
+            
+            <!-- Services Grid -->
+            <div class="services-grid">
+                
+                <!-- Servicio 1: Estrategia & Data Intelligence -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.9">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-brain">
+                            <span class="widget-dot"></span>
+                            <span class="widget-dot"></span>
+                            <span class="widget-dot"></span>
+                            <span class="widget-line"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Estrategia & Data Intelligence</h3>
+                        <p class="service-description">
+                            Decisiones que combinan análisis y creatividad. Interpretamos el comportamiento de las audiencias para diseñar estrategias que generan impacto real.
+                        </p>
+                        <span class="service-number">01</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 2: Publicidad 360° -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.95">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-circle">
+                            <span class="circle-ring"></span>
+                            <span class="circle-ring"></span>
+                            <span class="circle-core"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Publicidad 360°</h3>
+                        <p class="service-description">
+                            Presencia integral, resultados medibles. Campañas omnicanal que integran ATL, BTL y OTL. Cada acción se mide, aprende y optimiza con base en datos.
+                        </p>
+                        <span class="service-number">02</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 3: Comunicación que Conecta -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.9">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-message">
+                            <span class="message-bubble"></span>
+                            <span class="message-bubble"></span>
+                            <span class="message-pulse"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Comunicación que Conecta</h3>
+                        <p class="service-description">
+                            Historias con propósito y coherencia. Integramos influencers, PR y relacionamiento con medios para construir reputación y liderazgo.
+                        </p>
+                        <span class="service-number">03</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 4: Plan de Marketing & Performance -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.95">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-chart">
+                            <span class="chart-bar" style="--height: 60%"></span>
+                            <span class="chart-bar" style="--height: 85%"></span>
+                            <span class="chart-bar" style="--height: 100%"></span>
+                            <span class="chart-line"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Plan de Marketing & Performance</h3>
+                        <p class="service-description">
+                            Estrategia, eficiencia y resultados tangibles. Desde la definición de bases sólidas hasta la ejecución orientada a resultados.
+                        </p>
+                        <span class="service-number">04</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 5: Activaciones & Experiencias 360° -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.9">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-spark">
+                            <span class="spark-dot"></span>
+                            <span class="spark-dot"></span>
+                            <span class="spark-dot"></span>
+                            <span class="spark-burst"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Activaciones & Experiencias 360°</h3>
+                        <p class="service-description">
+                            Marcas que se viven, no solo se ven. Experiencias memorables que integran el mundo físico y digital con conexión emocional.
+                        </p>
+                        <span class="service-number">05</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 6: Engage Events & Summits -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.95">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-network">
+                            <span class="network-node"></span>
+                            <span class="network-node"></span>
+                            <span class="network-node"></span>
+                            <span class="network-connection"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Engage Events & Summits</h3>
+                        <p class="service-description">
+                            Conexiones que trascienden el escenario. Eventos corporativos y experiencias de marca que generan impacto, reputación y networking de valor.
+                        </p>
+                        <span class="service-number">06</span>
+                    </div>
+                </article>
+                
+                <!-- Servicio 7: Research & Media Lab -->
+                <article class="service-card animate-on-scroll" data-scroll-speed="0.9">
+                    <div class="service-icon">
+                        <div class="icon-widget widget-lab">
+                            <span class="lab-flask"></span>
+                            <span class="lab-bubble"></span>
+                            <span class="lab-bubble"></span>
+                            <span class="lab-wave"></span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Research & Media Lab</h3>
+                        <p class="service-description">
+                            Innovación basada en evidencia. Analítica avanzada, social listening e IA para descubrir insights que impulsan el valor de marca.
+                        </p>
+                        <span class="service-number">07</span>
+                    </div>
+                </article>
+                
+            </div>
+            
+            <!-- CTA Bottom -->
+            <div class="services-cta animate-on-scroll">
+                <p class="cta-text">¿Listo para elevar tu marca?</p>
+                <a href="#contacto" class="btn btn-primary">Hablemos de tu proyecto</a>
+            </div>
+        </div>
+        
+        <!-- Background Decorations -->
+        <div class="services-bg-decoration"></div>
+    </section>
+    
+    <!-- NOSOTROS SECTION -->
+    <section id="nosotros" class="section nosotros">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Quiénes Somos</span>
+                <h2 class="section-title">Elevate Media Labs</h2>
+                <p class="section-description">
+                    Donde la data escucha y las marcas hablan. Innovamos con datos, creamos con propósito.
+                </p>
+            </div>
+            
+            <!-- Pilares Grid -->
+            <div class="pilares-grid">
+                
+                <!-- Pilar 1: ELEVATE -->
+                <article class="pilar-card animate-on-scroll">
+                    <div class="pilar-icon">
+                        <div class="icon-elevation">
+                            <span class="elevation-arrow"></span>
+                            <span class="elevation-line"></span>
+                        </div>
+                    </div>
+                    <div class="pilar-content">
+                        <h3 class="pilar-title">🚀 Elevate</h3>
+                        <p class="pilar-subtitle">Visión y propósito</p>
+                        <p class="pilar-description">
+                            Impulsar marcas, ideas y estrategias hacia un nuevo nivel de relevancia. 
+                            Representamos crecimiento, transformación y liderazgo. No solo analizamos datos, 
+                            los convertimos en impulso estratégico.
+                        </p>
+                        <div class="pilar-claim">
+                            "Elevamos el valor de la marca con inteligencia y propósito."
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Pilar 2: MEDIA -->
+                <article class="pilar-card animate-on-scroll">
+                    <div class="pilar-icon">
+                        <div class="icon-media">
+                            <span class="media-wave"></span>
+                            <span class="media-wave"></span>
+                            <span class="media-wave"></span>
+                        </div>
+                    </div>
+                    <div class="pilar-content">
+                        <h3 class="pilar-title">💬 Media</h3>
+                        <p class="pilar-subtitle">Conexión y ecosistema</p>
+                        <p class="pilar-description">
+                            El puente entre las audiencias, los mensajes y los canales. Simboliza el terreno donde 
+                            convergen las conversaciones: medios tradicionales, digitales, sociales y experienciales. 
+                            Integramos todos los medios en un mismo lenguaje de datos y creatividad.
+                        </p>
+                        <div class="pilar-claim">
+                            "Medios que conectan, historias que perduran."
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Pilar 3: LABS -->
+                <article class="pilar-card animate-on-scroll">
+                    <div class="pilar-icon">
+                        <div class="icon-labs">
+                            <span class="labs-atom"></span>
+                            <span class="labs-orbit"></span>
+                            <span class="labs-orbit"></span>
+                        </div>
+                    </div>
+                    <div class="pilar-content">
+                        <h3 class="pilar-title">🔬 Labs</h3>
+                        <p class="pilar-subtitle">Innovación y evidencia</p>
+                        <p class="pilar-description">
+                            El laboratorio donde la intuición se valida con ciencia. Representa la búsqueda constante 
+                            de innovación, prueba y aprendizaje. Es el espacio donde la analítica, la IA y la creatividad 
+                            coexisten para crear soluciones únicas.
+                        </p>
+                        <div class="pilar-claim">
+                            "La innovación es nuestro método, los datos nuestro lenguaje."
+                        </div>
+                    </div>
+                </article>
+                
+            </div>
+            
+            <!-- Filosofía Detallada -->
+            <div class="filosofia-section animate-on-scroll">
+                <h3 class="filosofia-title">Nuestra Filosofía de Trabajo</h3>
+                <p class="filosofia-description">
+                    Creemos en la fusión perfecta entre datos, creatividad y estrategia para crear conexiones auténticas.
+                </p>
+                
+                <div class="filosofia-grid">
+                    
+                    <!-- Item 1: Data-Driven -->
+                    <div class="filosofia-item animate-on-scroll">
+                        <div class="filosofia-icon icon-interactive">
+                            <div class="icon-data-driven">
+                                <div class="data-bar" style="--height: 70%"></div>
+                                <div class="data-bar" style="--height: 90%"></div>
+                                <div class="data-bar" style="--height: 100%"></div>
+                                <div class="data-bar" style="--height: 80%"></div>
+                                <div class="data-trend"></div>
+                            </div>
+                        </div>
+                        <h4 class="filosofia-item-title">Data-Driven</h4>
+                        <p class="filosofia-item-description">
+                            Cada decisión respaldada por datos reales. Medimos, analizamos y optimizamos constantemente 
+                            para garantizar resultados tangibles y mejora continua.
+                        </p>
+                    </div>
+                    
+                    <!-- Item 2: Human-Centered -->
+                    <div class="filosofia-item animate-on-scroll">
+                        <div class="filosofia-icon icon-interactive">
+                            <div class="icon-human">
+                                <div class="human-circle"></div>
+                                <div class="human-ring"></div>
+                                <div class="human-ring"></div>
+                                <div class="human-pulse"></div>
+                            </div>
+                        </div>
+                        <h4 class="filosofia-item-title">Human-Centered</h4>
+                        <p class="filosofia-item-description">
+                            Las audiencias son personas, no números. Diseñamos experiencias que generan conexiones 
+                            emocionales auténticas y construyen relaciones duraderas.
+                        </p>
+                    </div>
+                    
+                    <!-- Item 3: Innovation First -->
+                    <div class="filosofia-item animate-on-scroll">
+                        <div class="filosofia-icon icon-interactive">
+                            <div class="icon-innovation">
+                                <div class="innovation-spark"></div>
+                                <div class="innovation-spark"></div>
+                                <div class="innovation-spark"></div>
+                                <div class="innovation-core"></div>
+                            </div>
+                        </div>
+                        <h4 class="filosofia-item-title">Innovation First</h4>
+                        <p class="filosofia-item-description">
+                            Experimentamos, aprendemos y evolucionamos. Aplicamos las últimas tecnologías y metodologías 
+                            para mantenernos a la vanguardia de la industria.
+                        </p>
+                    </div>
+                    
+                    <!-- Item 4: Results Obsessed -->
+                    <div class="filosofia-item animate-on-scroll">
+                        <div class="filosofia-icon icon-interactive">
+                            <div class="icon-results">
+                                <div class="results-target"></div>
+                                <div class="results-target"></div>
+                                <div class="results-arrow"></div>
+                            </div>
+                        </div>
+                        <h4 class="filosofia-item-title">Results Obsessed</h4>
+                        <p class="filosofia-item-description">
+                            Nos obsesionamos con los KPIs que importan. Cada campaña está diseñada para generar 
+                            impacto medible y retorno real de inversión.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- CASOS SECTION -->
+    <section id="casos" class="section casos">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Portfolio</span>
+                <h2 class="section-title">Casos de Éxito</h2>
+                <p class="section-description">
+                    Proyectos que transformaron datos en resultados reales y audiencias en comunidades comprometidas.
+                </p>
+            </div>
+            
+            <!-- Casos Grid -->
+            <div class="casos-grid">
+                
+                <!-- Caso 1 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Estrategia & Data Intelligence</div>
+                        <div class="caso-metrics">
+                            <span class="metric">+250% ROI</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Transformación Digital TechCorp</h3>
+                    <p class="caso-description">
+                        Implementamos una estrategia de data intelligence que permitió a TechCorp identificar 
+                        nuevos segmentos de mercado, resultando en un crecimiento de 250% en ROI en 6 meses.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Big Data</span>
+                        <span class="tag">Strategy</span>
+                    </div>
+                </article>
+                
+                <!-- Caso 2 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Publicidad 360°</div>
+                        <div class="caso-metrics">
+                            <span class="metric">+45M Reach</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Lanzamiento Marca EcoLife</h3>
+                    <p class="caso-description">
+                        Campaña omnicanal integrando ATL, BTL y OTL que alcanzó 45M de impresiones y 
+                        posicionó a EcoLife como líder en sustentabilidad en 3 meses.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">ATL</span>
+                        <span class="tag">Digital</span>
+                        <span class="tag">Branding</span>
+                    </div>
+                </article>
+                
+                <!-- Caso 3 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Comunicación</div>
+                        <div class="caso-metrics">
+                            <span class="metric">+80% Engagement</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Reputación FoodHub</h3>
+                    <p class="caso-description">
+                        Estrategia de comunicación con influencers y PR que incrementó el engagement en 80% 
+                        y convirtió a FoodHub en trending topic nacional durante su lanzamiento.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">Influencers</span>
+                        <span class="tag">PR</span>
+                        <span class="tag">Social Media</span>
+                    </div>
+                </article>
+                
+                <!-- Caso 4 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Performance Marketing</div>
+                        <div class="caso-metrics">
+                            <span class="metric">-60% CAC</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Optimización FinTech Solutions</h3>
+                    <p class="caso-description">
+                        Rediseñamos la estrategia de performance marketing reduciendo el CAC en 60% mientras 
+                        triplicamos las conversiones mediante automatización e IA predictiva.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">Automation</span>
+                        <span class="tag">AI</span>
+                        <span class="tag">CRO</span>
+                    </div>
+                </article>
+                
+                <!-- Caso 5 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Eventos & Experiencias</div>
+                        <div class="caso-metrics">
+                            <span class="metric">5K Asistentes</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Summit Innovation 2024</h3>
+                    <p class="caso-description">
+                        Diseñamos y producimos el summit tecnológico más importante del año, conectando 
+                        5,000 profesionales con 80+ speakers internacionales en formato híbrido.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">Events</span>
+                        <span class="tag">Hybrid</span>
+                        <span class="tag">Networking</span>
+                    </div>
+                </article>
+                
+                <!-- Caso 6 -->
+                <article class="caso-card animate-on-scroll">
+                    <div class="caso-header">
+                        <div class="caso-category">Research & Media Lab</div>
+                        <div class="caso-metrics">
+                            <span class="metric">+35% Brand Lift</span>
+                        </div>
+                    </div>
+                    <h3 class="caso-title">Estudio RetailTech Insights</h3>
+                    <p class="caso-description">
+                        Investigación con social listening e IA que reveló insights clave del mercado, 
+                        permitiendo a nuestro cliente aumentar su brand value en 35% en el sector retail.
+                    </p>
+                    <div class="caso-tags">
+                        <span class="tag">Research</span>
+                        <span class="tag">AI</span>
+                        <span class="tag">Insights</span>
+                    </div>
+                </article>
+                
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- CONTACTO SECTION -->
+    <section id="contacto" class="section contacto">
+        <div class="container">
+            <div class="contacto-wrapper">
+                
+                <!-- Contacto Info -->
+                <div class="contacto-info animate-on-scroll">
+                    <span class="section-label">Hablemos</span>
+                    <h2 class="contacto-title">¿Listo para elevar<br>tu marca?</h2>
+                    <p class="contacto-description">
+                        Estamos aquí para transformar tus datos en inteligencia accionable 
+                        y tus ideas en estrategias que generan impacto real.
+                    </p>
+                    
+                    <div class="contacto-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <p class="contact-label">Email</p>
+                                <a href="mailto:hola@elevatemedialabs.com" class="contact-link">hola@elevatemedialabs.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <p class="contact-label">Ubicación</p>
+                                <p class="contact-value">Global · Remote First</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contacto Form -->
+                <div class="contacto-form-wrapper animate-on-scroll">
+                    <form class="contacto-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="Tu nombre"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="tu@email.com"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company" class="form-label">Empresa (opcional)</label>
+                            <input 
+                                type="text" 
+                                id="company" 
+                                name="company" 
+                                class="form-input" 
+                                placeholder="Tu empresa"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensaje</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-input form-textarea" 
+                                placeholder="Cuéntanos sobre tu proyecto..."
+                                rows="5"
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-form">
+                            Enviar mensaje
+                        </button>
+                        
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">Elevate Media Labs</h3>
+                    <p class="footer-tagline">Estrategia & Data Intelligence</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#hero" class="footer-link">Inicio</a>
+                    <a href="#servicios" class="footer-link">Servicios</a>
+                    <a href="#nosotros" class="footer-link">Nosotros</a>
+                    <a href="#casos" class="footer-link">Portfolio</a>
+                    <a href="#contacto" class="footer-link">Contacto</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; 2025 Elevate Media Labs. Elevamos marcas con inteligencia y propósito.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- tsParticles Library -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
+

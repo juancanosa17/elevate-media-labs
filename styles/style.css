@@ -902,7 +902,7 @@ button {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-4xl);
   padding-left: 4px;
 }
 
@@ -915,7 +915,7 @@ button {
 /* Scroll Indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: var(--spacing-2xl);
+  bottom: var(--spacing-4xl);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -924,6 +924,7 @@ button {
   gap: var(--spacing-sm);
   opacity: 0.5;
   transition: opacity var(--transition-base);
+  margin-top: var(--spacing-3xl);
 }
 
 .scroll-indicator:hover {

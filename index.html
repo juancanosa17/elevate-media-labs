@@ -135,6 +135,9 @@
                         <a href="#casos" class="nav-link">Portfolio</a>
                     </li>
                     <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#contacto" class="nav-link">Contacto</a>
                     </li>
                 </ul>
@@ -788,6 +791,7 @@
                     <a href="#servicios" class="footer-link">Servicios</a>
                     <a href="#nosotros" class="footer-link">Nosotros</a>
                     <a href="#casos" class="footer-link">Portfolio</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
                     <a href="#contacto" class="footer-link">Contacto</a>
                 </div>
             </div>
@@ -800,11 +804,27 @@
         </div>
     </footer>
     
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
     <!-- tsParticles Library -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     
     <!-- JavaScript -->
     <script src="js/script.js"></script>
+    
+    <!-- Netlify Identity Redirect -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>
 

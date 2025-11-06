@@ -41,3 +41,9 @@ tmp/
 temp/
 *.tmp
 
+# Decap CMS local backend
+.decap/
+
+# Uploads (opcional - puedes querer commitearlos)
+# public/uploads/
+

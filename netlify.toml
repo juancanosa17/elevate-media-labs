@@ -1,0 +1,17 @@
+# Configuración para Netlify/Vercel
+# Git Gateway para autenticación
+
+[build]
+  publish = "."
+  command = "echo 'Static site - no build needed'"
+
+# Redireccionamiento para el admin
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# Habilitar Identity para autenticación
+[context.production]
+  environment = { HUGO_VERSION = "0.0.0" }
+

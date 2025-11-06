@@ -1,0 +1,88 @@
+backend:
+  name: git-gateway
+  branch: main # Branch a usar (main o master)
+
+# Configuración local para desarrollo
+local_backend: true
+
+# Ubicación de los archivos media
+media_folder: "public/uploads" # Carpeta donde se guardarán las imágenes
+public_folder: "/uploads" # URL pública para acceder a las imágenes
+
+# Configuración de idioma
+locale: 'es'
+
+# Colecciones (tipos de contenido)
+collections:
+  # BLOG POSTS
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
+      - { label: "Autor", name: "author", widget: "string" }
+      - { label: "Imagen Destacada", name: "featuredImage", widget: "image" }
+      - { label: "Categoría", name: "category", widget: "select", options: ["Estrategia", "Data Intelligence", "Marketing", "Comunicación", "Eventos", "Tecnología", "Tendencias"] }
+      - { label: "Excerpt (Resumen)", name: "excerpt", widget: "text" }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Estado", name: "draft", widget: "boolean", default: true }
+      - { label: "Tiempo de Lectura (min)", name: "readTime", widget: "number", default: 5 }
+  
+  # SERVICIOS
+  - name: "servicios"
+    label: "Servicios"
+    folder: "content/servicios"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Número de Orden", name: "order", widget: "number", default: 1 }
+      - { label: "Descripción Corta", name: "shortDescription", widget: "text" }
+      - { label: "Descripción Completa", name: "body", widget: "markdown" }
+      - { label: "Icono (nombre)", name: "icon", widget: "string", hint: "Nombre del ícono a usar" }
+      - { label: "Activo", name: "active", widget: "boolean", default: true }
+  
+  # CASOS DE ÉXITO
+  - name: "casos"
+    label: "Casos de Éxito"
+    folder: "content/casos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Cliente", name: "client", widget: "string" }
+      - { label: "Categoría", name: "category", widget: "string" }
+      - { label: "Métrica Principal", name: "metric", widget: "string", hint: "Ej: +250% ROI" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Imagen", name: "image", widget: "image", required: false }
+      - { label: "Orden", name: "order", widget: "number", default: 1 }
+      - { label: "Destacado", name: "featured", widget: "boolean", default: false }
+  
+  # CONFIGURACIÓN GENERAL
+  - name: "settings"
+    label: "Configuración"
+    files:
+      - label: "Información General"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - { label: "Nombre del Sitio", name: "siteName", widget: "string", default: "Elevate Media Labs" }
+          - { label: "Descripción", name: "siteDescription", widget: "text" }
+          - { label: "Email de Contacto", name: "contactEmail", widget: "string" }
+          - { label: "Teléfono", name: "contactPhone", widget: "string", required: false }
+          - { label: "Dirección", name: "address", widget: "text", required: false }
+      
+      - label: "Redes Sociales"
+        name: "social"
+        file: "content/settings/social.json"
+        fields:
+          - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+          - { label: "Twitter", name: "twitter", widget: "string", required: false }
+          - { label: "Instagram", name: "instagram", widget: "string", required: false }
+          - { label: "Facebook", name: "facebook", widget: "string", required: false }
+

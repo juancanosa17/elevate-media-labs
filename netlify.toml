@@ -1,17 +1,13 @@
-# Configuración para Netlify/Vercel
-# Git Gateway para autenticación
+# Configuración para Netlify
+# Git Gateway para autenticación con Decap CMS
 
 [build]
   publish = "."
-  command = "echo 'Static site - no build needed'"
+  command = "echo 'Static site - no build required'"
 
-# Redireccionamiento para el admin
+# Redireccionamiento para el admin panel
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
-
-# Habilitar Identity para autenticación
-[context.production]
-  environment = { HUGO_VERSION = "0.0.0" }
 

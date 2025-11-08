@@ -27,7 +27,7 @@ function createPostCard(post) {
                     <span class="post-read-time">${post.readTime} min lectura</span>
                 </div>
                 <h3 class="post-title">
-                    <a href="blog-post.html?slug=${post.slug}">${post.title}</a>
+                    <a href="/blog-post.html?slug=${post.slug}">${post.title}</a>
                 </h3>
                 <p class="post-excerpt">
                     ${excerpt}
@@ -37,7 +37,7 @@ function createPostCard(post) {
                         <div class="author-avatar">${post.author.charAt(0).toUpperCase()}</div>
                         <span class="author-name">${post.author}</span>
                     </div>
-                    <a href="blog-post.html?slug=${post.slug}" class="post-link">Leer más →</a>
+                    <a href="/blog-post.html?slug=${post.slug}" class="post-link">Leer más →</a>
                 </div>
             </div>
         </article>

@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog de Elevate Media Labs - Insights, tendencias y estrategias sobre data intelligence, marketing digital y comunicación.">
-    <meta name="keywords" content="blog, marketing digital, data intelligence, estrategia, tendencias">
-    <meta name="author" content="Elevate Media Labs">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Blog - Elevate Media Labs">
-    <meta property="og:description" content="Insights, tendencias y estrategias sobre data intelligence y marketing.">
+    <meta name="description" content="Blog de Elevate Media Labs">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 80L140 260L256 240Z' fill='%23a855f7'/%3E%3Cpath d='M256 240L140 260L180 340L256 300Z' fill='%236b21a8'/%3E%3Cpath d='M256 80L372 260L256 240Z' fill='%2394a3b8'/%3E%3Cpath d='M256 240L372 260L332 340L256 300Z' fill='%23475569'/%3E%3Cline x1='256' y1='80' x2='256' y2='300' stroke='white' stroke-width='8'/%3E%3Cpath d='M216 305L236 290L276 290L296 305L296 335L276 350L236 350L216 335Z' stroke='%2322d3ee' stroke-width='3' fill='none'/%3E%3Ccircle cx='256' cy='320' r='4' fill='%2322d3ee'/%3E%3C/svg%3E">
@@ -23,7 +16,10 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles/style.css">
     
-    <title>Blog - Elevate Media Labs | Insights & Estrategias</title>
+    <!-- Marked.js para renderizar Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <title>Post - Elevate Media Labs</title>
 </head>
 <body>
     
@@ -32,10 +28,7 @@
     
     <!-- ANIMATED BACKGROUND -->
     <div class="animated-background">
-        <!-- Grid tecnológico sutil -->
         <div class="tech-grid"></div>
-        
-        <!-- Hexágonos flotantes minimalistas -->
         <div class="tech-hex tech-hex-1"></div>
         <div class="tech-hex tech-hex-2"></div>
     </div>
@@ -43,21 +36,13 @@
     <!-- NAVIGATION / HEADER -->
     <header class="header" id="header">
         <nav class="nav container">
-            <!-- Logo -->
             <a href="index.html" class="nav-logo">
                 <svg class="logo-icon" width="36" height="36" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Flecha superior izquierda (morado) -->
                     <path d="M256 80 L140 260 L256 240 Z" fill="url(#gradient-purple-1)"/>
                     <path d="M256 240 L140 260 L180 340 L256 300 Z" fill="url(#gradient-purple-2)"/>
-                    
-                    <!-- Flecha superior derecha (gris) -->
                     <path d="M256 80 L372 260 L256 240 Z" fill="url(#gradient-gray-1)"/>
                     <path d="M256 240 L372 260 L332 340 L256 300 Z" fill="url(#gradient-gray-2)"/>
-                    
-                    <!-- Línea divisoria blanca -->
                     <line x1="256" y1="80" x2="256" y2="300" stroke="white" stroke-width="8" stroke-linecap="round"/>
-                    
-                    <!-- Circuito inferior (cyan) -->
                     <g transform="translate(256, 320)">
                         <path d="M -40,-15 L -20,-30 L 20,-30 L 40,-15 L 40,15 L 20,30 L -20,30 L -40,15 Z" 
                               stroke="#22d3ee" stroke-width="3" fill="none"/>
@@ -67,8 +52,6 @@
                         <circle cx="15" cy="10" r="3" fill="#22d3ee"/>
                         <circle cx="0" cy="0" r="4" fill="#22d3ee"/>
                     </g>
-                    
-                    <!-- Gradientes -->
                     <defs>
                         <linearGradient id="gradient-purple-1" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
@@ -91,7 +74,6 @@
                 <span class="nav-logo-text">Elevate</span>
             </a>
             
-            <!-- Nav Links -->
             <ul class="nav-list" id="nav-menu">
                 <li><a href="index.html#servicios" class="nav-link">Servicios</a></li>
                 <li><a href="index.html#nosotros" class="nav-link">Nosotros</a></li>
@@ -99,95 +81,83 @@
                 <li><a href="blog.html" class="nav-link active">Blog</a></li>
                 <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
                 
-                <!-- CTA Mobile -->
                 <li class="nav-cta-mobile">
                     <a href="index.html#contacto" class="btn btn-primary">Hablemos</a>
                 </li>
             </ul>
             
-            <!-- CTA Button -->
             <div class="nav-cta">
                 <a href="index.html#contacto" class="btn btn-primary btn-nav">Hablemos</a>
             </div>
             
-            <!-- Mobile Menu Toggle -->
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
                 <span class="hamburger"></span>
             </button>
         </nav>
     </header>
     
-    <!-- BLOG HERO -->
-    <section class="blog-hero section">
-        <div class="container">
-            <div class="blog-hero-content animate-on-scroll">
-                <span class="section-label">Insights & Conocimiento</span>
-                <h1 class="blog-hero-title">Blog</h1>
-                <p class="blog-hero-description">
-                    Tendencias, estrategias y análisis sobre data intelligence, marketing digital y comunicación efectiva.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- BLOG CONTENT -->
-    <section class="blog-content section">
+    <!-- BLOG POST CONTENT -->
+    <article class="blog-post-content section">
         <div class="container">
             
-            <!-- Blog Grid -->
-            <div class="blog-grid">
+            <!-- Loading State -->
+            <div class="post-loading" id="post-loading">
+                <div class="loading-spinner"></div>
+                <p>Cargando post...</p>
+            </div>
+            
+            <!-- Post Container -->
+            <div class="post-container" id="post-container" style="display: none;">
                 
-                <!-- Mensaje de próximamente -->
-                <div class="blog-empty-state">
-                    <div class="empty-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M7 12H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M7 17H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
+                <!-- Back to Blog -->
+                <a href="blog.html" class="back-link">← Volver al Blog</a>
+                
+                <!-- Post Header -->
+                <header class="post-header">
+                    <span class="post-category" id="post-category"></span>
+                    <h1 class="post-title" id="post-title"></h1>
+                    
+                    <div class="post-meta">
+                        <div class="post-author-info">
+                            <div class="author-avatar" id="post-author-avatar"></div>
+                            <div>
+                                <span class="author-name" id="post-author"></span>
+                                <div class="post-details">
+                                    <span class="post-date" id="post-date"></span>
+                                    <span class="post-separator">•</span>
+                                    <span class="post-read-time" id="post-read-time"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="empty-title">Próximamente</h2>
-                    <p class="empty-description">
-                        Estamos preparando contenido de calidad sobre estrategia, data intelligence y tendencias del mercado. ¡Vuelve pronto!
-                    </p>
-                    <a href="index.html#contacto" class="btn btn-primary">Contáctanos mientras tanto</a>
+                </header>
+                
+                <!-- Featured Image -->
+                <div class="post-featured-image" id="post-featured-image"></div>
+                
+                <!-- Post Body -->
+                <div class="post-body" id="post-body"></div>
+                
+                <!-- Tags -->
+                <div class="post-tags" id="post-tags"></div>
+                
+                <!-- Share & Back -->
+                <div class="post-actions">
+                    <a href="blog.html" class="btn btn-primary">← Volver al Blog</a>
                 </div>
                 
-                <!-- 
-                Estructura para futuros posts:
-                
-                <article class="blog-post-card animate-on-scroll">
-                    <div class="post-image">
-                        <img src="images/blog/post-1.jpg" alt="Título del post">
-                        <span class="post-category">Estrategia</span>
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-date">15 Nov 2024</span>
-                            <span class="post-read-time">5 min lectura</span>
-                        </div>
-                        <h3 class="post-title">
-                            <a href="blog/post-slug.html">Título del Post de Blog</a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Breve descripción del contenido del post que atraiga al lector a hacer clic y leer más...
-                        </p>
-                        <div class="post-footer">
-                            <div class="post-author">
-                                <img src="images/team/author.jpg" alt="Nombre Autor" class="author-avatar">
-                                <span class="author-name">Nombre Autor</span>
-                            </div>
-                            <a href="blog/post-slug.html" class="post-link">Leer más →</a>
-                        </div>
-                    </div>
-                </article>
-                -->
-                
+            </div>
+            
+            <!-- Error State -->
+            <div class="post-error" id="post-error" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h2>Post no encontrado</h2>
+                <p>El artículo que buscas no existe o ha sido eliminado.</p>
+                <a href="blog.html" class="btn btn-primary">Volver al Blog</a>
             </div>
             
         </div>
-    </section>
+    </article>
     
     <!-- FOOTER -->
     <footer class="footer">
@@ -223,20 +193,8 @@
     
     <!-- JavaScript -->
     <script src="js/script.js"></script>
-    <script src="js/blog.js"></script>
+    <script src="js/blog-post.js"></script>
     
-    <!-- Netlify Identity Redirect -->
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
 </body>
 </html>
 

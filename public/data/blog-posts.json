@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "ejemplo-post",
+    "title": "Bienvenidos al Blog de Elevate Media Labs",
+    "date": "2024-11-06T10:00:00.000Z",
+    "author": "Equipo Elevate",
+    "featuredImage": "/uploads/blog-hero.jpg",
+    "category": "Tendencias",
+    "excerpt": "Este es un post de ejemplo para demostrar cómo funciona el sistema de blog. Puedes editarlo o eliminarlo desde el panel de administración.",
+    "tags": ["Bienvenida", "Ejemplo"],
+    "draft": false,
+    "readTime": 3,
+    "content": "# Bienvenidos a nuestro Blog\n\nEste es un **post de ejemplo** que demuestra las capacidades del sistema de gestión de contenido.\n\n## ¿Cómo funciona?\n\nEl admin panel te permite:\n\n- ✅ Crear y editar posts fácilmente\n- ✅ Subir imágenes\n- ✅ Usar markdown para dar formato\n- ✅ Organizar por categorías\n- ✅ Guardar borradores\n\n## Edita este post\n\nVe a `/admin` y podrás editar o eliminar este contenido desde el panel de administración.\n\n### Características\n\nEste blog incluye:\n\n1. **Editor visual** con preview en tiempo real\n2. **Gestión de imágenes** drag & drop\n3. **Categorías y tags** para organizar contenido\n4. **Control de publicación** (borrador/publicado)\n\n¡Empieza a crear contenido increíble! 🚀"
+  }
+]
+

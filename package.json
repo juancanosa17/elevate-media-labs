@@ -1,0 +1,16 @@
+{
+  "name": "elevate-media-labs",
+  "version": "1.0.0",
+  "description": "Elevate Media Labs - Estrategia & Data Intelligence",
+  "scripts": {
+    "build:blog": "node scripts/generate-blog-data.js",
+    "build": "npm run build:blog"
+  },
+  "keywords": ["marketing", "data intelligence", "estrategia"],
+  "author": "Elevate Media Labs",
+  "license": "MIT",
+  "devDependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}
+

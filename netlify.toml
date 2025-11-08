@@ -3,7 +3,7 @@
 
 [build]
   publish = "."
-  command = "echo 'Static site - no build required'"
+  command = "npm install && npm run build"
 
 # Redireccionamiento para el admin panel
 [[redirects]]

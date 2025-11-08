@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main # Branch a usar (main o master)
 
-# Configuración local para desarrollo
-local_backend: true
+# Configuración local para desarrollo (comentado para producción)
+# local_backend: true
 
 # Ubicación de los archivos media
 media_folder: "public/uploads" # Carpeta donde se guardarán las imágenes

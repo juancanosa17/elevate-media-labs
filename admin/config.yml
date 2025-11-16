@@ -1,88 +1,641 @@
 backend:
   name: git-gateway
-  branch: main # Branch a usar (main o master)
+  branch: main
 
 # Configuración local para desarrollo (comentado para producción)
 # local_backend: true
 
 # Ubicación de los archivos media
-media_folder: "public/uploads" # Carpeta donde se guardarán las imágenes
-public_folder: "/uploads" # URL pública para acceder a las imágenes
+media_folder: "public/uploads"
+public_folder: "/uploads"
 
 # Configuración de idioma
 locale: 'es'
+
+# Configuración de la interfaz
+logo_url: '/logo.svg'
+site_url: 'https://elevatemedialabs1.netlify.app'
+display_url: 'https://elevatemedialabs1.netlify.app'
+
+# Configuración de medios
+media_library:
+  name: uploadcare
+  config:
+    publicKey: 'demopublickey'
+    multiple: true
+    tabs: 'file url'
+    effects: 'crop, rotate, enhance, grayscale'
+    imageShrink: '2000x2000'
+    previewStep: true
+
+# Configuración del editor
+editor:
+  preview: true
+
+# Slug settings
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
 
 # Colecciones (tipos de contenido)
 collections:
   # BLOG POSTS
   - name: "blog"
-    label: "Blog"
+    label: "📝 Blog"
+    label_singular: "Post"
     folder: "content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog-post.html?slug={{slug}}"
+    summary: "{{title}} - {{category}} - {{date}}"
+    sortable_fields: ['date', 'title', 'category']
+    view_filters:
+      - label: Publicados
+        field: draft
+        pattern: false
+      - label: Borradores
+        field: draft
+        pattern: true
+      - label: Estrategia
+        field: category
+        pattern: 'Estrategia'
+      - label: Data Intelligence
+        field: category
+        pattern: 'Data Intelligence'
+      - label: Marketing
+        field: category
+        pattern: 'Marketing'
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
-      - { label: "Autor", name: "author", widget: "string" }
-      - { label: "Imagen Destacada", name: "featuredImage", widget: "image" }
-      - { label: "Categoría", name: "category", widget: "select", options: ["Estrategia", "Data Intelligence", "Marketing", "Comunicación", "Eventos", "Tecnología", "Tendencias"] }
-      - { label: "Excerpt (Resumen)", name: "excerpt", widget: "text" }
-      - { label: "Contenido", name: "body", widget: "markdown" }
-      - { label: "Tags", name: "tags", widget: "list", default: [] }
-      - { label: "Estado", name: "draft", widget: "boolean", default: true }
-      - { label: "Tiempo de Lectura (min)", name: "readTime", widget: "number", default: 5 }
+      - { 
+          label: "Título", 
+          name: "title", 
+          widget: "string",
+          hint: "El título principal del artículo (SEO optimizado, 60-70 caracteres)" 
+        }
+      - { 
+          label: "Fecha de Publicación", 
+          name: "date", 
+          widget: "datetime",
+          date_format: "DD/MM/YYYY",
+          time_format: "HH:mm",
+          format: "YYYY-MM-DD HH:mm:ss",
+          hint: "Fecha y hora de publicación del artículo"
+        }
+      - { 
+          label: "Autor", 
+          name: "author", 
+          widget: "string",
+          default: "Elevate Media Labs",
+          hint: "Nombre del autor del artículo"
+        }
+      - { 
+          label: "Imagen Destacada", 
+          name: "featuredImage", 
+          widget: "image",
+          hint: "Imagen principal (recomendado: 1200x630px para redes sociales)",
+          required: true
+        }
+      - { 
+          label: "Categoría", 
+          name: "category", 
+          widget: "select", 
+          options: [
+            "Estrategia",
+            "Data Intelligence", 
+            "Marketing", 
+            "Comunicación", 
+            "Eventos", 
+            "Tecnología", 
+            "Tendencias",
+            "Casos de Éxito",
+            "Innovación"
+          ],
+          hint: "Categoría principal del artículo"
+        }
+      - { 
+          label: "Resumen (Excerpt)", 
+          name: "excerpt", 
+          widget: "text",
+          hint: "Resumen breve para listados y SEO (150-160 caracteres)",
+          pattern: ['^.{50,160}$', "El resumen debe tener entre 50 y 160 caracteres"]
+        }
+      - { 
+          label: "Contenido", 
+          name: "body", 
+          widget: "markdown",
+          hint: "Contenido principal del artículo en Markdown",
+          buttons: ["bold", "italic", "code", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+        }
+      - { 
+          label: "Tags", 
+          name: "tags", 
+          widget: "list",
+          hint: "Etiquetas para categorización y búsqueda (3-5 tags recomendados)",
+          max: 5,
+          min: 1
+        }
+      - { 
+          label: "Estado", 
+          name: "draft", 
+          widget: "boolean", 
+          default: true,
+          hint: "Activar para publicar el artículo en el sitio web"
+        }
+      - { 
+          label: "Tiempo de Lectura (minutos)", 
+          name: "readTime", 
+          widget: "number", 
+          default: 5,
+          value_type: "int",
+          min: 1,
+          max: 60,
+          hint: "Tiempo estimado de lectura en minutos"
+        }
+      - { 
+          label: "SEO - Meta Título", 
+          name: "seoTitle", 
+          widget: "string",
+          required: false,
+          hint: "Título optimizado para SEO (si es diferente al título principal)"
+        }
+      - { 
+          label: "SEO - Meta Descripción", 
+          name: "seoDescription", 
+          widget: "text",
+          required: false,
+          hint: "Descripción para motores de búsqueda (150-160 caracteres)"
+        }
+      - { 
+          label: "Destacado en Home", 
+          name: "featured", 
+          widget: "boolean", 
+          default: false,
+          hint: "Mostrar este artículo en la página principal"
+        }
+      - { 
+          label: "Call to Action", 
+          name: "cta", 
+          widget: "object",
+          collapsed: true,
+          required: false,
+          hint: "Llamado a la acción al final del artículo",
+          fields:
+            - { label: "Texto del botón", name: "text", widget: "string", default: "Contáctanos" }
+            - { label: "URL", name: "url", widget: "string", default: "#contacto" }
+        }
   
   # SERVICIOS
   - name: "servicios"
-    label: "Servicios"
+    label: "🎯 Servicios"
+    label_singular: "Servicio"
     folder: "content/servicios"
     create: true
     slug: "{{slug}}"
+    summary: "{{order}} - {{title}}"
+    sortable_fields: ['order', 'title']
+    view_filters:
+      - label: Activos
+        field: active
+        pattern: true
+      - label: Inactivos
+        field: active
+        pattern: false
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Número de Orden", name: "order", widget: "number", default: 1 }
-      - { label: "Descripción Corta", name: "shortDescription", widget: "text" }
-      - { label: "Descripción Completa", name: "body", widget: "markdown" }
-      - { label: "Icono (nombre)", name: "icon", widget: "string", hint: "Nombre del ícono a usar" }
-      - { label: "Activo", name: "active", widget: "boolean", default: true }
+      - { 
+          label: "Título", 
+          name: "title", 
+          widget: "string",
+          hint: "Nombre del servicio"
+        }
+      - { 
+          label: "Número de Orden", 
+          name: "order", 
+          widget: "number", 
+          default: 1,
+          value_type: "int",
+          min: 1,
+          hint: "Orden de aparición en la web (menor número = más arriba)"
+        }
+      - { 
+          label: "Descripción Corta", 
+          name: "shortDescription", 
+          widget: "text",
+          hint: "Resumen breve para tarjetas (máx. 200 caracteres)"
+        }
+      - { 
+          label: "Descripción Completa", 
+          name: "body", 
+          widget: "markdown",
+          hint: "Descripción detallada del servicio"
+        }
+      - { 
+          label: "Icono", 
+          name: "icon", 
+          widget: "select",
+          options: ["chart-bar", "lightbulb", "megaphone", "users", "calendar", "cog", "rocket", "star"],
+          hint: "Icono visual del servicio"
+        }
+      - { 
+          label: "Color de Acento", 
+          name: "color", 
+          widget: "select",
+          options: [
+            { label: "Púrpura", value: "purple" },
+            { label: "Cyan", value: "cyan" },
+            { label: "Gradiente", value: "gradient" }
+          ],
+          default: "gradient",
+          hint: "Color temático del servicio"
+        }
+      - { 
+          label: "Características", 
+          name: "features", 
+          widget: "list",
+          required: false,
+          hint: "Lista de características clave del servicio",
+          fields:
+            - { label: "Característica", name: "feature", widget: "string" }
+        }
+      - { 
+          label: "Casos Relacionados", 
+          name: "relatedCases", 
+          widget: "list",
+          required: false,
+          hint: "IDs de casos de éxito relacionados"
+        }
+      - { 
+          label: "Activo", 
+          name: "active", 
+          widget: "boolean", 
+          default: true,
+          hint: "Mostrar este servicio en la web"
+        }
   
   # CASOS DE ÉXITO
   - name: "casos"
-    label: "Casos de Éxito"
+    label: "🏆 Casos de Éxito"
+    label_singular: "Caso"
     folder: "content/casos"
     create: true
     slug: "{{slug}}"
+    summary: "{{client}} - {{metric}}"
+    sortable_fields: ['order', 'client', 'category']
+    view_filters:
+      - label: Destacados
+        field: featured
+        pattern: true
+      - label: Estrategia
+        field: category
+        pattern: 'Estrategia'
+      - label: Marketing
+        field: category
+        pattern: 'Marketing'
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Cliente", name: "client", widget: "string" }
-      - { label: "Categoría", name: "category", widget: "string" }
-      - { label: "Métrica Principal", name: "metric", widget: "string", hint: "Ej: +250% ROI" }
-      - { label: "Descripción", name: "description", widget: "text" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Imagen", name: "image", widget: "image", required: false }
-      - { label: "Orden", name: "order", widget: "number", default: 1 }
-      - { label: "Destacado", name: "featured", widget: "boolean", default: false }
+      - { 
+          label: "Título del Caso", 
+          name: "title", 
+          widget: "string",
+          hint: "Título descriptivo del proyecto"
+        }
+      - { 
+          label: "Cliente", 
+          name: "client", 
+          widget: "string",
+          hint: "Nombre del cliente o marca"
+        }
+      - { 
+          label: "Industria", 
+          name: "industry", 
+          widget: "select",
+          options: [
+            "Tecnología",
+            "E-commerce",
+            "Retail",
+            "Servicios",
+            "Salud",
+            "Educación",
+            "Finanzas",
+            "Alimentación",
+            "Moda",
+            "Entretenimiento",
+            "Otro"
+          ],
+          hint: "Sector o industria del cliente"
+        }
+      - { 
+          label: "Categoría", 
+          name: "category", 
+          widget: "select",
+          options: [
+            "Estrategia",
+            "Data Intelligence",
+            "Marketing Digital",
+            "Comunicación",
+            "Eventos",
+            "Campaña 360°"
+          ],
+          hint: "Tipo de servicio principal"
+        }
+      - { 
+          label: "Métrica Principal", 
+          name: "metric", 
+          widget: "string", 
+          hint: "Resultado destacado (Ej: +250% ROI, 1.5M impresiones)"
+        }
+      - { 
+          label: "Descripción Corta", 
+          name: "description", 
+          widget: "text",
+          hint: "Resumen del caso para tarjetas (máx. 200 caracteres)"
+        }
+      - { 
+          label: "Descripción Completa", 
+          name: "body", 
+          widget: "markdown",
+          required: false,
+          hint: "Historia completa del caso (opcional)"
+        }
+      - { 
+          label: "Resultados Clave", 
+          name: "results", 
+          widget: "list",
+          required: false,
+          hint: "Lista de resultados medibles",
+          fields:
+            - { label: "Métrica", name: "metric", widget: "string", hint: "Ej: ROI" }
+            - { label: "Valor", name: "value", widget: "string", hint: "Ej: +250%" }
+        }
+      - { 
+          label: "Tags", 
+          name: "tags", 
+          widget: "list",
+          hint: "Palabras clave del proyecto"
+        }
+      - { 
+          label: "Imagen", 
+          name: "image", 
+          widget: "image", 
+          required: false,
+          hint: "Imagen representativa del caso"
+        }
+      - { 
+          label: "Galería de Imágenes", 
+          name: "gallery", 
+          widget: "list",
+          required: false,
+          hint: "Imágenes adicionales del proyecto",
+          field: { label: "Imagen", name: "image", widget: "image" }
+        }
+      - { 
+          label: "Fecha del Proyecto", 
+          name: "projectDate", 
+          widget: "datetime",
+          required: false,
+          hint: "Fecha de realización del proyecto"
+        }
+      - { 
+          label: "Orden de Aparición", 
+          name: "order", 
+          widget: "number", 
+          default: 1,
+          value_type: "int",
+          min: 1,
+          hint: "Posición en el portfolio"
+        }
+      - { 
+          label: "Destacado", 
+          name: "featured", 
+          widget: "boolean", 
+          default: false,
+          hint: "Mostrar en posición destacada"
+        }
+      - { 
+          label: "Testimonio del Cliente", 
+          name: "testimonial", 
+          widget: "object",
+          collapsed: true,
+          required: false,
+          hint: "Opinión del cliente sobre el proyecto",
+          fields:
+            - { label: "Texto", name: "text", widget: "text" }
+            - { label: "Nombre", name: "author", widget: "string" }
+            - { label: "Cargo", name: "position", widget: "string" }
+        }
   
   # CONFIGURACIÓN GENERAL
   - name: "settings"
-    label: "Configuración"
+    label: "⚙️ Configuración"
     files:
       - label: "Información General"
         name: "general"
         file: "content/settings/general.json"
         fields:
-          - { label: "Nombre del Sitio", name: "siteName", widget: "string", default: "Elevate Media Labs" }
-          - { label: "Descripción", name: "siteDescription", widget: "text" }
-          - { label: "Email de Contacto", name: "contactEmail", widget: "string" }
-          - { label: "Teléfono", name: "contactPhone", widget: "string", required: false }
-          - { label: "Dirección", name: "address", widget: "text", required: false }
+          - { 
+              label: "Nombre del Sitio", 
+              name: "siteName", 
+              widget: "string", 
+              default: "Elevate Media Labs",
+              hint: "Nombre principal de la marca"
+            }
+          - { 
+              label: "Tagline", 
+              name: "tagline", 
+              widget: "string",
+              default: "Estrategia & Data Intelligence",
+              hint: "Lema o propuesta de valor"
+            }
+          - { 
+              label: "Descripción", 
+              name: "siteDescription", 
+              widget: "text",
+              hint: "Descripción general del sitio para SEO"
+            }
+          - { 
+              label: "Email de Contacto", 
+              name: "contactEmail", 
+              widget: "string",
+              pattern: ['^[^\s@]+@[^\s@]+\.[^\s@]+$', "Debe ser un email válido"],
+              hint: "Email principal de contacto"
+            }
+          - { 
+              label: "Teléfono", 
+              name: "contactPhone", 
+              widget: "string", 
+              required: false,
+              hint: "Número de teléfono de contacto"
+            }
+          - { 
+              label: "Dirección", 
+              name: "address", 
+              widget: "text", 
+              required: false,
+              hint: "Dirección física de la oficina"
+            }
+          - { 
+              label: "Horario de Atención", 
+              name: "businessHours", 
+              widget: "string", 
+              required: false,
+              hint: "Ej: Lun-Vie 9:00-18:00"
+            }
+          - { 
+              label: "Google Analytics ID", 
+              name: "googleAnalyticsId", 
+              widget: "string", 
+              required: false,
+              hint: "ID de Google Analytics (Ej: G-XXXXXXXXXX)"
+            }
+          - { 
+              label: "Google Tag Manager ID", 
+              name: "gtmId", 
+              widget: "string", 
+              required: false,
+              hint: "ID de Google Tag Manager (Ej: GTM-XXXXXXX)"
+            }
+          - { 
+              label: "Pixel de Facebook", 
+              name: "facebookPixel", 
+              widget: "string", 
+              required: false,
+              hint: "ID del Pixel de Facebook"
+            }
       
       - label: "Redes Sociales"
         name: "social"
         file: "content/settings/social.json"
         fields:
-          - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
-          - { label: "Twitter", name: "twitter", widget: "string", required: false }
-          - { label: "Instagram", name: "instagram", widget: "string", required: false }
-          - { label: "Facebook", name: "facebook", widget: "string", required: false }
+          - { 
+              label: "LinkedIn", 
+              name: "linkedin", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa del perfil de LinkedIn"
+            }
+          - { 
+              label: "Twitter/X", 
+              name: "twitter", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa del perfil de Twitter/X"
+            }
+          - { 
+              label: "Instagram", 
+              name: "instagram", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa del perfil de Instagram"
+            }
+          - { 
+              label: "Facebook", 
+              name: "facebook", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa de la página de Facebook"
+            }
+          - { 
+              label: "YouTube", 
+              name: "youtube", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa del canal de YouTube"
+            }
+          - { 
+              label: "TikTok", 
+              name: "tiktok", 
+              widget: "string", 
+              required: false,
+              hint: "URL completa del perfil de TikTok"
+            }
+          - { 
+              label: "WhatsApp", 
+              name: "whatsapp", 
+              widget: "string", 
+              required: false,
+              hint: "Número de WhatsApp con código de país (Ej: +5491123456789)"
+            }
+      
+      - label: "Contenido del Hero"
+        name: "hero"
+        file: "content/settings/hero.json"
+        fields:
+          - { 
+              label: "Título Principal", 
+              name: "title", 
+              widget: "string",
+              default: "ELEVATE MEDIA LABS",
+              hint: "Título grande del hero"
+            }
+          - { 
+              label: "Subtítulo", 
+              name: "subtitle", 
+              widget: "string",
+              default: "Estrategia & Data Intelligence",
+              hint: "Subtítulo descriptivo"
+            }
+          - { 
+              label: "Descripción", 
+              name: "description", 
+              widget: "text",
+              hint: "Texto de presentación en el hero"
+            }
+          - { 
+              label: "Texto del Botón CTA", 
+              name: "ctaText", 
+              widget: "string",
+              default: "Hablemos",
+              hint: "Texto del botón principal"
+            }
+          - { 
+              label: "Link del Botón CTA", 
+              name: "ctaLink", 
+              widget: "string",
+              default: "#contacto",
+              hint: "URL o ancla del botón"
+            }
+      
+      - label: "SEO Global"
+        name: "seo"
+        file: "content/settings/seo.json"
+        fields:
+          - { 
+              label: "Meta Título", 
+              name: "metaTitle", 
+              widget: "string",
+              hint: "Título por defecto para SEO (60-70 caracteres)"
+            }
+          - { 
+              label: "Meta Descripción", 
+              name: "metaDescription", 
+              widget: "text",
+              hint: "Descripción por defecto para SEO (150-160 caracteres)"
+            }
+          - { 
+              label: "Palabras Clave", 
+              name: "keywords", 
+              widget: "list",
+              hint: "Palabras clave principales del sitio"
+            }
+          - { 
+              label: "Imagen OG (Open Graph)", 
+              name: "ogImage", 
+              widget: "image",
+              required: false,
+              hint: "Imagen por defecto para compartir en redes (1200x630px)"
+            }
+          - { 
+              label: "Idioma", 
+              name: "language", 
+              widget: "select",
+              options: ["es", "en", "pt"],
+              default: "es",
+              hint: "Idioma principal del sitio"
+            }
+          - { 
+              label: "Región", 
+              name: "region", 
+              widget: "string",
+              required: false,
+              hint: "Región geográfica (Ej: AR, MX, CO)"
+            }
 

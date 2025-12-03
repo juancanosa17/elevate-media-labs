@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel | Elevate Media Labs</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 80L140 260L256 240Z' fill='%23a855f7'/%3E%3Cpath d='M256 240L140 260L180 340L256 300Z' fill='%236b21a8'/%3E%3Cpath d='M256 80L372 260L256 240Z' fill='%2394a3b8'/%3E%3Cpath d='M256 240L372 260L332 340L256 300Z' fill='%23475569'/%3E%3Cline x1='256' y1='80' x2='256' y2='300' stroke='white' stroke-width='8'/%3E%3Cpath d='M216 305L236 290L276 290L296 305L296 335L276 350L236 350L216 335Z' stroke='%2322d3ee' stroke-width='3' fill='none'/%3E%3Ccircle cx='256' cy='320' r='4' fill='%2322d3ee'/%3E%3C/svg%3E">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Admin Styles -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="auth-screen">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <svg class="logo-icon" width="48" height="48" viewBox="0 0 512 512" fill="none">
+                    <path d="M256 80 L140 260 L256 240 Z" fill="url(#gp1)"/>
+                    <path d="M256 240 L140 260 L180 340 L256 300 Z" fill="url(#gp2)"/>
+                    <path d="M256 80 L372 260 L256 240 Z" fill="url(#gg1)"/>
+                    <path d="M256 240 L372 260 L332 340 L256 300 Z" fill="url(#gg2)"/>
+                    <line x1="256" y1="80" x2="256" y2="300" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    <g transform="translate(256, 320)">
+                        <path d="M -40,-15 L -20,-30 L 20,-30 L 40,-15 L 40,15 L 20,30 L -20,30 L -40,15 Z" stroke="#22d3ee" stroke-width="3" fill="none"/>
+                        <circle cx="0" cy="0" r="4" fill="#22d3ee"/>
+                    </g>
+                    <defs>
+                        <linearGradient id="gp1" x1="140" y1="80" x2="256" y2="260" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#b794f6"/><stop offset="100%" stop-color="#8b5cf6"/>
+                        </linearGradient>
+                        <linearGradient id="gp2" x1="140" y1="260" x2="256" y2="340" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#6b21a8"/>
+                        </linearGradient>
+                        <linearGradient id="gg1" x1="372" y1="80" x2="256" y2="260" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#cbd5e1"/><stop offset="100%" stop-color="#94a3b8"/>
+                        </linearGradient>
+                        <linearGradient id="gg2" x1="372" y1="260" x2="256" y2="340" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#475569"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Elevate Admin</h1>
+                <p>Panel de Administración</p>
+            </div>
+            <div class="auth-box">
+                <h2>Iniciar Sesión</h2>
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span>Ingresar</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+                <div class="auth-divider"><span>o</span></div>
+                <button id="btn-netlify-login" class="btn btn-secondary btn-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M16.934 8.519a1.044 1.044 0 0 1 .303.23l2.349-1.045-2.192-2.171-.491 2.954zM12.06 6.546a1.305 1.305 0 0 1 .209.574l3.497 1.482a1.044 1.044 0 0 1 .605-.288l.52-3.122-4.341 1.055zM12.328 9.386l-.107.093-.015.012a1.233 1.233 0 0 1-.2.122l-.127.056-.119.037-.143.03-.151.014-.146-.005a1.292 1.292 0 0 1-.258-.05l-2.403 3.996a1.112 1.112 0 0 1 .161.146l4.195-.234 1.038-3.678-.006-.008-.169-.261a1.233 1.233 0 0 1-.048-.069l-1.502-.201zM9.142 9.095l-.157-.151-.193-.143-.143-.082-.186-.079-.177-.051-.251-.028-.085.003-.14.013-.156.03-.183.052-.064.024-.229.121-.103.07-.177.149-.08.086-.02.017-.154.184-.084.125-.099.2-.038.106-.052.178 1.444.201.122-1.021-.095-.004zM7.18 5.847l-.413-.411-.156-.138-.082-.059-.074-.043-.154-.073-.154-.052-.202-.041-.195-.005-.102.006-.132.018-.192.046-.091.031-.166.076-.106.063-.044.029-.036.023-.108.084-.089.082-.056.058-.07.086-.037.054-.047.07-.061.115-.015.037 4.346 1.028.014-.116-.002-.163-.024-.187-.04-.141-.077-.191-.086-.153-.095-.129-.097-.108-.15-.136L7.18 5.847zM4.829 9.461l-.022.02-.117.153-.089.140-.065.14-.042.133-.026.133-.009.117v.173l.022.16.029.12.058.167.07.142.118.18.087.107 4.163-.24-.055-.14-.015-.053-.017-.095-.008-.09-.001-.091.009-.097.013-.08.025-.111.01-.026.017-.056.029-.077.038-.08-4.193-1.031a.988.988 0 0 1-.01.078l-.023.139zM9.354 14.595l-.107-.08-4.177.237.179.2.04.04.086.078.092.07.1.065.169.09.141.055.167.042.182.023.178-.002.185-.025.188-.061.166-.076.102-.061.15-.104.092-.078.07-.072-1.803 3.012 3.122 2.16 1.262-5.338-.056-.024-.112-.032-.109-.019-.117-.007-.097.002-.108.007.003.001-.089.009-.075.009.004 0-.011.001-.007.001-.047.006z"/>
+                    </svg>
+                    <span>Continuar con Netlify</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="sidebar-logo">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 512 512" fill="none">
+                        <path d="M256 80 L140 260 L256 240 Z" fill="#a855f7"/>
+                        <path d="M256 240 L140 260 L180 340 L256 300 Z" fill="#6b21a8"/>
+                        <path d="M256 80 L372 260 L256 240 Z" fill="#94a3b8"/>
+                        <path d="M256 240 L372 260 L332 340 L256 300 Z" fill="#475569"/>
+                        <line x1="256" y1="80" x2="256" y2="300" stroke="white" stroke-width="8"/>
+                        <path d="M216 305L236 290L276 290L296 305L296 335L276 350L236 350L216 335Z" stroke="#22d3ee" stroke-width="3" fill="none"/>
+                    </svg>
+                    <span>Elevate</span>
+                </a>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#/dashboard" class="nav-link" data-route="dashboard">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="9" rx="1"/>
+                                <rect x="14" y="3" width="7" height="5" rx="1"/>
+                                <rect x="14" y="12" width="7" height="9" rx="1"/>
+                                <rect x="3" y="16" width="7" height="5" rx="1"/>
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#/blog" class="nav-link" data-route="blog">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                                <path d="M2 2l7.586 7.586"/>
+                                <circle cx="11" cy="11" r="2"/>
+                            </svg>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#/servicios" class="nav-link" data-route="servicios">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                            <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#/casos" class="nav-link" data-route="casos">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20V10"/>
+                                <path d="M18 20V4"/>
+                                <path d="M6 20v-4"/>
+                            </svg>
+                            <span>Casos de Éxito</span>
+                        </a>
+                    </li>
+                    <li class="nav-divider"></li>
+                    <li class="nav-item">
+                        <a href="#/settings" class="nav-link" data-route="settings">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#/media" class="nav-link" data-route="media">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                            <span>Media</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-name">Usuario</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="btn-logout" title="Cerrar sesión">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard</h1>
+                    <div class="breadcrumb" id="breadcrumb"></div>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn btn-icon" id="btn-refresh" title="Actualizar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <polyline points="1 20 1 14 7 14"/>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                        </svg>
+                    </button>
+                    <a href="/" class="btn btn-secondary btn-sm" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                        <span>Ver sitio</span>
+                    </a>
+                </div>
+            </header>
+            
+            <!-- Page Content -->
+            <div class="page-content" id="page-content">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-container hidden"></div>
+
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Admin Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
+

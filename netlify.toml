@@ -1,13 +1,27 @@
 # Configuración para Netlify
-# Git Gateway para autenticación con Decap CMS
+# Git Gateway para autenticación
 
 [build]
   publish = "."
   command = "npm install && npm run build"
 
-# Redireccionamiento para el admin panel
+# Redireccionamiento para el NUEVO admin panel personalizado
+[[redirects]]
+  from = "/admin-panel/*"
+  to = "/admin-panel/index.html"
+  status = 200
+
+# Redireccionamiento para Decap CMS (antiguo admin)
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
+
+# Headers de seguridad
+[[headers]]
+  for = "/admin-panel/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
 

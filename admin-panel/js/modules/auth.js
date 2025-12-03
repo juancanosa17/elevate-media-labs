@@ -72,30 +72,29 @@ export class Auth {
    * Login with email/password
    */
   async login(email, password) {
-    // Try Netlify Identity first
-    if (this.netlifyIdentity) {
-      return new Promise((resolve, reject) => {
-        this.netlifyIdentity.login(email, password, true)
-          .then(() => resolve())
-          .catch((error) => {
-            // If Netlify Identity fails, try demo mode
-            if (this.isDemoMode(email, password)) {
-              this.loginDemo(email);
-              resolve();
-            } else {
-              reject(new Error(error.message || 'Credenciales inválidas'));
-            }
-          });
-      });
-    }
-    
-    // Demo mode fallback
+    // Check demo mode first (always available)
     if (this.isDemoMode(email, password)) {
       this.loginDemo(email);
       return;
     }
     
-    throw new Error('Credenciales inválidas');
+    // Try Netlify Identity with GoTrue API
+    if (this.netlifyIdentity) {
+      const user = this.netlifyIdentity.currentUser();
+      const goTrue = this.netlifyIdentity.gotrue;
+      
+      if (goTrue) {
+        try {
+          const response = await goTrue.login(email, password, true);
+          this.handleAuthSuccess(response);
+          return;
+        } catch (error) {
+          throw new Error(error.message || 'Credenciales inválidas');
+        }
+      }
+    }
+    
+    throw new Error('Credenciales inválidas. Usa admin@elevate.com / admin123 para modo demo.');
   }
   
   /**

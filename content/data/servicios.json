@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "title": "Estrategia & Data Intelligence",
+    "slug": "estrategia-data-intelligence",
+    "description": "Transformamos datos en insights accionables para decisiones estratégicas.",
+    "icon": "strategy",
+    "order": 1,
+    "active": true
+  },
+  {
+    "id": 2,
+    "title": "Publicidad 360°",
+    "slug": "publicidad-360",
+    "description": "Campañas integradas que conectan con tu audiencia en todos los canales.",
+    "icon": "ads",
+    "order": 2,
+    "active": true
+  },
+  {
+    "id": 3,
+    "title": "Comunicación que Conecta",
+    "slug": "comunicacion-que-conecta",
+    "description": "Estrategias de comunicación que construyen relaciones duraderas.",
+    "icon": "communication",
+    "order": 3,
+    "active": true
+  },
+  {
+    "id": 4,
+    "title": "Plan de Marketing & Performance",
+    "slug": "marketing-performance",
+    "description": "Marketing orientado a resultados medibles y crecimiento sostenible.",
+    "icon": "marketing",
+    "order": 4,
+    "active": true
+  },
+  {
+    "id": 5,
+    "title": "Activaciones & Experiencias 360°",
+    "slug": "activaciones-experiencias",
+    "description": "Experiencias memorables que generan conexiones emocionales.",
+    "icon": "events",
+    "order": 5,
+    "active": true
+  },
+  {
+    "id": 6,
+    "title": "Engage Events & Summits",
+    "slug": "engage-events",
+    "description": "Eventos corporativos y summits que inspiran y transforman.",
+    "icon": "summit",
+    "order": 6,
+    "active": true
+  },
+  {
+    "id": 7,
+    "title": "Research & Media Lab",
+    "slug": "research-media-lab",
+    "description": "Investigación y análisis de medios para estrategias basadas en evidencia.",
+    "icon": "research",
+    "order": 7,
+    "active": true
+  }
+]
+

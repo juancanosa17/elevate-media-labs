@@ -4,6 +4,22 @@
 [build]
   publish = "."
   command = "npm install && npm run build"
+  functions = "netlify/functions"
+
+# Node version
+[build.environment]
+  NODE_VERSION = "18"
+
+# Funciones serverless
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# API endpoints para el CMS
+[[redirects]]
+  from = "/.netlify/functions/github-cms/*"
+  to = "/.netlify/functions/github-cms/:splat"
+  status = 200
 
 # Redireccionamiento para el NUEVO admin panel personalizado
 [[redirects]]
@@ -17,7 +33,7 @@
   to = "/admin/index.html"
   status = 200
 
-# Headers de seguridad
+# Headers de seguridad para admin panel
 [[headers]]
   for = "/admin-panel/*"
   [headers.values]
@@ -25,3 +41,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Headers para las funciones API
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"

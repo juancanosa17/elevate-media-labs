@@ -1,13 +1,36 @@
 /**
  * API - Data Access Layer
- * Handles reading/writing content files
- * Works with JSON files and Markdown with frontmatter
+ * Handles reading/writing content via Netlify Functions + GitHub API
  */
 
 export class API {
   constructor(store) {
     this.store = store;
-    this.basePath = '/content';
+    this.baseUrl = '/.netlify/functions/github-cms';
+    this.useLocalFallback = false; // Set to true for local development
+  }
+  
+  /**
+   * Make API request to Netlify Function
+   */
+  async request(endpoint, options = {}) {
+    const url = `${this.baseUrl}${endpoint}`;
+    
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+      }
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'API request failed');
+    }
+    
+    return data;
   }
   
   /**
@@ -18,11 +41,8 @@ export class API {
     if (cached) return cached;
     
     try {
-      // In production, this would fetch from a serverless function or git API
-      const response = await fetch('/public/data/blog-posts.json');
-      if (!response.ok) throw new Error('Failed to fetch posts');
-      
-      const data = await response.json();
+      // Try API first
+      const data = await this.request('/posts');
       const posts = data.posts || [];
       
       this.store.set('posts', posts);
@@ -30,7 +50,21 @@ export class API {
       
       return posts;
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.warn('API error, trying local fallback:', error.message);
+      
+      // Fallback to static file
+      try {
+        const response = await fetch('/public/data/blog-posts.json');
+        if (response.ok) {
+          const posts = await response.json();
+          this.store.set('posts', posts);
+          this.store.setCache('posts', posts);
+          return Array.isArray(posts) ? posts : [];
+        }
+      } catch (e) {
+        console.error('Local fallback also failed');
+      }
+      
       return [];
     }
   }
@@ -47,40 +81,38 @@ export class API {
    * Save a post (create or update)
    */
   async savePost(post) {
-    // In production, this would use Git Gateway API or serverless function
-    const posts = await this.getPosts();
-    const existingIndex = posts.findIndex(p => p.slug === post.slug);
-    
-    if (existingIndex >= 0) {
-      posts[existingIndex] = { ...posts[existingIndex], ...post, updatedAt: new Date().toISOString() };
-    } else {
-      post.createdAt = new Date().toISOString();
-      post.slug = post.slug || this.generateSlug(post.title);
-      posts.unshift(post);
+    try {
+      const result = await this.request('/posts', {
+        method: 'POST',
+        body: JSON.stringify(post)
+      });
+      
+      // Clear cache to force refresh
+      this.store.clearCache('posts');
+      
+      return result.post || post;
+    } catch (error) {
+      console.error('Error saving post:', error);
+      throw error;
     }
-    
-    this.store.set('posts', posts);
-    this.store.clearCache('posts');
-    
-    // Store locally for demo
-    localStorage.setItem('admin-posts', JSON.stringify(posts));
-    
-    return post;
   }
   
   /**
    * Delete a post
    */
   async deletePost(slug) {
-    const posts = await this.getPosts();
-    const filtered = posts.filter(p => p.slug !== slug);
-    
-    this.store.set('posts', filtered);
-    this.store.clearCache('posts');
-    
-    localStorage.setItem('admin-posts', JSON.stringify(filtered));
-    
-    return true;
+    try {
+      await this.request(`/posts/${slug}`, {
+        method: 'DELETE'
+      });
+      
+      this.store.clearCache('posts');
+      
+      return true;
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      throw error;
+    }
   }
   
   /**
@@ -91,16 +123,17 @@ export class API {
     if (cached) return cached;
     
     try {
-      // Try to read from localStorage first (demo mode)
-      const localData = localStorage.getItem('admin-servicios');
-      if (localData) {
-        const servicios = JSON.parse(localData);
-        this.store.set('servicios', servicios);
-        this.store.setCache('servicios', servicios);
-        return servicios;
-      }
+      const data = await this.request('/servicios');
+      const servicios = data.servicios || [];
       
-      // Default servicios structure
+      this.store.set('servicios', servicios);
+      this.store.setCache('servicios', servicios);
+      
+      return servicios;
+    } catch (error) {
+      console.warn('API error for servicios:', error.message);
+      
+      // Default servicios
       const defaultServicios = [
         { id: 1, title: 'Estrategia & Data Intelligence', order: 1, active: true },
         { id: 2, title: 'Publicidad 360°', order: 2, active: true },
@@ -115,9 +148,6 @@ export class API {
       this.store.setCache('servicios', defaultServicios);
       
       return defaultServicios;
-    } catch (error) {
-      console.error('Error fetching servicios:', error);
-      return [];
     }
   }
   
@@ -133,35 +163,37 @@ export class API {
    * Save servicio
    */
   async saveServicio(servicio) {
-    const servicios = await this.getServicios();
-    const existingIndex = servicios.findIndex(s => s.id === servicio.id);
-    
-    if (existingIndex >= 0) {
-      servicios[existingIndex] = { ...servicios[existingIndex], ...servicio };
-    } else {
-      servicio.id = Math.max(...servicios.map(s => s.id), 0) + 1;
-      servicios.push(servicio);
+    try {
+      const result = await this.request('/servicios', {
+        method: 'POST',
+        body: JSON.stringify(servicio)
+      });
+      
+      this.store.clearCache('servicios');
+      
+      return result.servicio || servicio;
+    } catch (error) {
+      console.error('Error saving servicio:', error);
+      throw error;
     }
-    
-    this.store.set('servicios', servicios);
-    this.store.clearCache('servicios');
-    localStorage.setItem('admin-servicios', JSON.stringify(servicios));
-    
-    return servicio;
   }
   
   /**
    * Delete servicio
    */
   async deleteServicio(id) {
-    const servicios = await this.getServicios();
-    const filtered = servicios.filter(s => s.id !== parseInt(id));
-    
-    this.store.set('servicios', filtered);
-    this.store.clearCache('servicios');
-    localStorage.setItem('admin-servicios', JSON.stringify(filtered));
-    
-    return true;
+    try {
+      await this.request(`/servicios/${id}`, {
+        method: 'DELETE'
+      });
+      
+      this.store.clearCache('servicios');
+      
+      return true;
+    } catch (error) {
+      console.error('Error deleting servicio:', error);
+      throw error;
+    }
   }
   
   /**
@@ -172,15 +204,17 @@ export class API {
     if (cached) return cached;
     
     try {
-      const localData = localStorage.getItem('admin-casos');
-      if (localData) {
-        const casos = JSON.parse(localData);
-        this.store.set('casos', casos);
-        this.store.setCache('casos', casos);
-        return casos;
-      }
+      const data = await this.request('/casos');
+      const casos = data.casos || [];
       
-      // Default casos from the main website
+      this.store.set('casos', casos);
+      this.store.setCache('casos', casos);
+      
+      return casos;
+    } catch (error) {
+      console.warn('API error for casos:', error.message);
+      
+      // Default casos
       const defaultCasos = [
         { id: 1, title: 'Transformación Digital TechCorp', client: 'TechCorp', category: 'Estrategia & Data Intelligence', metric: '+250% ROI', featured: true },
         { id: 2, title: 'Lanzamiento Marca EcoLife', client: 'EcoLife', category: 'Publicidad 360°', metric: '+45M Reach', featured: true },
@@ -194,9 +228,6 @@ export class API {
       this.store.setCache('casos', defaultCasos);
       
       return defaultCasos;
-    } catch (error) {
-      console.error('Error fetching casos:', error);
-      return [];
     }
   }
   
@@ -212,35 +243,37 @@ export class API {
    * Save caso
    */
   async saveCaso(caso) {
-    const casos = await this.getCasos();
-    const existingIndex = casos.findIndex(c => c.id === caso.id);
-    
-    if (existingIndex >= 0) {
-      casos[existingIndex] = { ...casos[existingIndex], ...caso };
-    } else {
-      caso.id = Math.max(...casos.map(c => c.id), 0) + 1;
-      casos.push(caso);
+    try {
+      const result = await this.request('/casos', {
+        method: 'POST',
+        body: JSON.stringify(caso)
+      });
+      
+      this.store.clearCache('casos');
+      
+      return result.caso || caso;
+    } catch (error) {
+      console.error('Error saving caso:', error);
+      throw error;
     }
-    
-    this.store.set('casos', casos);
-    this.store.clearCache('casos');
-    localStorage.setItem('admin-casos', JSON.stringify(casos));
-    
-    return caso;
   }
   
   /**
    * Delete caso
    */
   async deleteCaso(id) {
-    const casos = await this.getCasos();
-    const filtered = casos.filter(c => c.id !== parseInt(id));
-    
-    this.store.set('casos', filtered);
-    this.store.clearCache('casos');
-    localStorage.setItem('admin-casos', JSON.stringify(filtered));
-    
-    return true;
+    try {
+      await this.request(`/casos/${id}`, {
+        method: 'DELETE'
+      });
+      
+      this.store.clearCache('casos');
+      
+      return true;
+    } catch (error) {
+      console.error('Error deleting caso:', error);
+      throw error;
+    }
   }
   
   /**
@@ -251,20 +284,11 @@ export class API {
     if (cached) return cached;
     
     try {
-      const localData = localStorage.getItem('admin-settings');
-      if (localData) {
-        const settings = JSON.parse(localData);
-        this.store.set('settings', settings);
-        this.store.setCache('settings', settings);
-        return settings;
-      }
-      
-      // Fetch from files
       const [general, social, hero, seo] = await Promise.all([
-        this.fetchJson('/content/settings/general.json').catch(() => ({})),
-        this.fetchJson('/content/settings/social.json').catch(() => ({})),
-        this.fetchJson('/content/settings/hero.json').catch(() => ({})),
-        this.fetchJson('/content/settings/seo.json').catch(() => ({})),
+        this.request('/settings/general').catch(() => ({})),
+        this.request('/settings/social').catch(() => ({})),
+        this.request('/settings/hero').catch(() => ({})),
+        this.request('/settings/seo').catch(() => ({})),
       ]);
       
       const settings = { general, social, hero, seo };
@@ -274,8 +298,26 @@ export class API {
       
       return settings;
     } catch (error) {
-      console.error('Error fetching settings:', error);
-      return {};
+      console.warn('API error for settings:', error.message);
+      
+      // Try fetching from static files
+      try {
+        const [general, social, hero, seo] = await Promise.all([
+          this.fetchJson('/content/settings/general.json').catch(() => ({})),
+          this.fetchJson('/content/settings/social.json').catch(() => ({})),
+          this.fetchJson('/content/settings/hero.json').catch(() => ({})),
+          this.fetchJson('/content/settings/seo.json').catch(() => ({})),
+        ]);
+        
+        const settings = { general, social, hero, seo };
+        
+        this.store.set('settings', settings);
+        this.store.setCache('settings', settings);
+        
+        return settings;
+      } catch (e) {
+        return { general: {}, social: {}, hero: {}, seo: {} };
+      }
     }
   }
   
@@ -283,14 +325,24 @@ export class API {
    * Save settings
    */
   async saveSettings(section, data) {
-    const settings = await this.getSettings();
-    settings[section] = { ...settings[section], ...data };
-    
-    this.store.set('settings', settings);
-    this.store.clearCache('settings');
-    localStorage.setItem('admin-settings', JSON.stringify(settings));
-    
-    return settings;
+    try {
+      await this.request(`/settings/${section}`, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+      
+      // Update local cache
+      const settings = await this.getSettings();
+      settings[section] = { ...settings[section], ...data };
+      
+      this.store.set('settings', settings);
+      this.store.clearCache('settings');
+      
+      return settings;
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      throw error;
+    }
   }
   
   /**
@@ -352,4 +404,3 @@ export class API {
     });
   }
 }
-

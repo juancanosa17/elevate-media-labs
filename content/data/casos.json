@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "title": "Transformación Digital TechCorp",
+    "client": "TechCorp",
+    "category": "Estrategia & Data Intelligence",
+    "description": "Implementación de estrategia data-driven que revolucionó la toma de decisiones.",
+    "metric": "+250% ROI",
+    "featured": true,
+    "image": "",
+    "order": 1
+  },
+  {
+    "id": 2,
+    "title": "Lanzamiento Marca EcoLife",
+    "client": "EcoLife",
+    "category": "Publicidad 360°",
+    "description": "Campaña de lanzamiento multicanal para marca de productos sustentables.",
+    "metric": "+45M Reach",
+    "featured": true,
+    "image": "",
+    "order": 2
+  },
+  {
+    "id": 3,
+    "title": "Reputación FoodHub",
+    "client": "FoodHub",
+    "category": "Comunicación",
+    "description": "Gestión de crisis y reconstrucción de reputación de marca.",
+    "metric": "+80% Engagement",
+    "featured": false,
+    "image": "",
+    "order": 3
+  },
+  {
+    "id": 4,
+    "title": "Optimización FinTech Solutions",
+    "client": "FinTech Solutions",
+    "category": "Performance Marketing",
+    "description": "Optimización de campañas de adquisición con reducción significativa de CAC.",
+    "metric": "-60% CAC",
+    "featured": false,
+    "image": "",
+    "order": 4
+  },
+  {
+    "id": 5,
+    "title": "Summit Innovation 2024",
+    "client": "Summit Innovation",
+    "category": "Eventos & Experiencias",
+    "description": "Producción integral del evento de innovación más importante del año.",
+    "metric": "5K Asistentes",
+    "featured": true,
+    "image": "",
+    "order": 5
+  },
+  {
+    "id": 6,
+    "title": "Estudio RetailTech Insights",
+    "client": "RetailTech",
+    "category": "Research & Media Lab",
+    "description": "Investigación de mercado y análisis de competencia para expansión regional.",
+    "metric": "+35% Brand Lift",
+    "featured": false,
+    "image": "",
+    "order": 6
+  }
+]
+

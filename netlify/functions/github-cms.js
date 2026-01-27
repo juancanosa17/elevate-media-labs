@@ -18,18 +18,22 @@ const headers = {
 async function githubRequest(endpoint, options = {}) {
   const url = `https://api.github.com/repos/${GITHUB_REPO}${endpoint}`;
   
+  console.log(`GitHub API Request: ${options.method || 'GET'} ${url}`);
+  
   const response = await fetch(url, {
     ...options,
     headers: {
       'Authorization': `Bearer ${GITHUB_TOKEN}`,
       'Accept': 'application/vnd.github.v3+json',
       'Content-Type': 'application/json',
+      'User-Agent': 'Elevate-CMS',
       ...options.headers
     }
   });
   
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
+    console.error(`GitHub API Error: ${response.status}`, error);
     throw new Error(error.message || `GitHub API error: ${response.status}`);
   }
   
@@ -43,7 +47,8 @@ async function getFile(path) {
     const content = Buffer.from(data.content, 'base64').toString('utf-8');
     return { content, sha: data.sha };
   } catch (error) {
-    if (error.message.includes('404')) {
+    if (error.message.includes('404') || error.message.includes('Not Found')) {
+      console.log(`File not found: ${path}`);
       return { content: null, sha: null };
     }
     throw error;
@@ -61,6 +66,8 @@ async function saveFile(path, content, message, sha = null) {
   if (sha) {
     body.sha = sha;
   }
+  
+  console.log(`Saving file: ${path}`);
   
   return githubRequest(`/contents/${path}`, {
     method: 'PUT',
@@ -119,54 +126,6 @@ function postToMarkdown(post) {
   return `---\n${yaml}\n---\n\n${post.body || ''}`;
 }
 
-// Parse markdown with frontmatter to post object
-function markdownToPost(content, slug) {
-  const match = content.match(/^---\n([\s\S]*?)\n---\n\n?([\s\S]*)$/);
-  if (!match) return null;
-  
-  const [, frontmatterStr, body] = match;
-  const post = { slug, body };
-  
-  // Simple YAML parser for our frontmatter
-  const lines = frontmatterStr.split('\n');
-  let currentKey = null;
-  let currentArray = null;
-  
-  for (const line of lines) {
-    if (line.startsWith('  - ')) {
-      // Array item
-      if (currentArray) {
-        const value = line.replace('  - ', '').replace(/^"|"$/g, '');
-        post[currentKey].push(value);
-      }
-    } else if (line.includes(': ')) {
-      const colonIndex = line.indexOf(': ');
-      const key = line.substring(0, colonIndex);
-      let value = line.substring(colonIndex + 2);
-      
-      // Check if array starts
-      if (value === '' || value === '[]') {
-        post[key] = [];
-        currentKey = key;
-        currentArray = value === '' ? true : false;
-      } else {
-        currentArray = false;
-        // Remove quotes
-        value = value.replace(/^"|"$/g, '');
-        // Convert booleans
-        if (value === 'true') value = true;
-        else if (value === 'false') value = false;
-        // Convert numbers
-        else if (!isNaN(value) && value !== '') value = Number(value);
-        
-        post[key] = value;
-      }
-    }
-  }
-  
-  return post;
-}
-
 // Handlers for different content types
 const handlers = {
   // BLOG POSTS
@@ -176,12 +135,15 @@ const handlers = {
       const posts = content ? JSON.parse(content) : [];
       return { statusCode: 200, headers, body: JSON.stringify({ posts }) };
     } catch (error) {
+      console.error('Error in getPosts:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
   
   async savePost(post) {
     try {
+      console.log('Saving post:', post.title);
+      
       // Generate slug if new post
       if (!post.slug) {
         post.slug = generateSlug(post.title);
@@ -237,6 +199,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true, post: postMeta }) };
     } catch (error) {
+      console.error('Error in savePost:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -268,6 +231,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     } catch (error) {
+      console.error('Error in deletePost:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -280,7 +244,8 @@ const handlers = {
       const data = content ? JSON.parse(content) : {};
       return { statusCode: 200, headers, body: JSON.stringify(data) };
     } catch (error) {
-      return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
+      console.error('Error in getSettings:', error);
+      return { statusCode: 200, headers, body: JSON.stringify({}) };
     }
   },
   
@@ -298,6 +263,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true, data }) };
     } catch (error) {
+      console.error('Error in saveSettings:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -309,7 +275,7 @@ const handlers = {
       const servicios = content ? JSON.parse(content) : [];
       return { statusCode: 200, headers, body: JSON.stringify({ servicios }) };
     } catch (error) {
-      // Return default if file doesn't exist
+      console.error('Error in getServicios:', error);
       const defaultServicios = [
         { id: 1, title: 'Estrategia & Data Intelligence', slug: 'estrategia-data-intelligence', order: 1, active: true },
         { id: 2, title: 'Publicidad 360°', slug: 'publicidad-360', order: 2, active: true },
@@ -346,6 +312,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true, servicio }) };
     } catch (error) {
+      console.error('Error in saveServicio:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -365,6 +332,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     } catch (error) {
+      console.error('Error in deleteServicio:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -376,6 +344,7 @@ const handlers = {
       const casos = content ? JSON.parse(content) : [];
       return { statusCode: 200, headers, body: JSON.stringify({ casos }) };
     } catch (error) {
+      console.error('Error in getCasos:', error);
       const defaultCasos = [
         { id: 1, title: 'Transformación Digital TechCorp', client: 'TechCorp', category: 'Estrategia & Data Intelligence', metric: '+250% ROI', featured: true },
         { id: 2, title: 'Lanzamiento Marca EcoLife', client: 'EcoLife', category: 'Publicidad 360°', metric: '+45M Reach', featured: true },
@@ -411,6 +380,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true, caso }) };
     } catch (error) {
+      console.error('Error in saveCaso:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   },
@@ -430,6 +400,7 @@ const handlers = {
       
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     } catch (error) {
+      console.error('Error in deleteCaso:', error);
       return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
     }
   }
@@ -437,6 +408,9 @@ const handlers = {
 
 // Main handler
 exports.handler = async (event) => {
+  console.log('Request:', event.httpMethod, event.path);
+  console.log('Token configured:', !!GITHUB_TOKEN);
+  
   // Handle CORS preflight
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
@@ -444,15 +418,37 @@ exports.handler = async (event) => {
   
   // Check auth token
   if (!GITHUB_TOKEN) {
+    console.error('GITHUB_TOKEN not configured!');
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'GitHub token not configured' })
+      body: JSON.stringify({ 
+        error: 'GITHUB_TOKEN not configured. Please add it in Netlify Site Settings > Environment Variables.' 
+      })
     };
   }
   
-  const path = event.path.replace('/.netlify/functions/github-cms', '');
+  // Parse path - handle both direct and redirected paths
+  let path = event.path;
+  
+  // Remove function prefix if present
+  if (path.includes('/.netlify/functions/github-cms')) {
+    path = path.replace('/.netlify/functions/github-cms', '');
+  }
+  
+  // Ensure path starts with /
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+  
+  // Remove trailing slash
+  if (path.length > 1 && path.endsWith('/')) {
+    path = path.slice(0, -1);
+  }
+  
   const method = event.httpMethod;
+  
+  console.log('Parsed path:', path, 'Method:', method);
   
   try {
     let body = {};
@@ -507,13 +503,31 @@ exports.handler = async (event) => {
       return handlers.deleteCaso(id);
     }
     
+    // Debug endpoint
+    if (path === '/debug' || path === '') {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          message: 'GitHub CMS API is running',
+          tokenConfigured: !!GITHUB_TOKEN,
+          repo: GITHUB_REPO,
+          branch: GITHUB_BRANCH,
+          path: event.path,
+          parsedPath: path
+        })
+      };
+    }
+    
+    console.log('Route not found:', path);
     return {
       statusCode: 404,
       headers,
-      body: JSON.stringify({ error: 'Not found' })
+      body: JSON.stringify({ error: `Route not found: ${path}` })
     };
     
   } catch (error) {
+    console.error('Handler error:', error);
     return {
       statusCode: 500,
       headers,
@@ -521,4 +535,3 @@ exports.handler = async (event) => {
     };
   }
 };
-

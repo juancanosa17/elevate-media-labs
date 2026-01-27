@@ -52,6 +52,22 @@
             </div>
             <div class="auth-box">
                 <h2>Iniciar Sesión</h2>
+                <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: 1.5rem; text-align: center;">
+                    Acceso seguro con Netlify Identity
+                </p>
+                
+                <!-- Primary: Netlify Identity Button -->
+                <button id="btn-netlify-login" class="btn btn-primary btn-full" style="margin-bottom: 1rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <span>Iniciar Sesión Seguro</span>
+                </button>
+                
+                <div class="auth-divider"><span>o ingresa tus credenciales</span></div>
+                
+                <!-- Secondary: Direct email/password form -->
                 <form id="login-form" class="auth-form">
                     <div class="form-group">
                         <label for="login-email">Email</label>
@@ -61,20 +77,17 @@
                         <label for="login-password">Contraseña</label>
                         <input type="password" id="login-password" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-full">
+                    <button type="submit" class="btn btn-secondary btn-full">
                         <span>Ingresar</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </button>
                 </form>
-                <div class="auth-divider"><span>o</span></div>
-                <button id="btn-netlify-login" class="btn btn-secondary btn-full">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M16.934 8.519a1.044 1.044 0 0 1 .303.23l2.349-1.045-2.192-2.171-.491 2.954zM12.06 6.546a1.305 1.305 0 0 1 .209.574l3.497 1.482a1.044 1.044 0 0 1 .605-.288l.52-3.122-4.341 1.055zM12.328 9.386l-.107.093-.015.012a1.233 1.233 0 0 1-.2.122l-.127.056-.119.037-.143.03-.151.014-.146-.005a1.292 1.292 0 0 1-.258-.05l-2.403 3.996a1.112 1.112 0 0 1 .161.146l4.195-.234 1.038-3.678-.006-.008-.169-.261a1.233 1.233 0 0 1-.048-.069l-1.502-.201zM9.142 9.095l-.157-.151-.193-.143-.143-.082-.186-.079-.177-.051-.251-.028-.085.003-.14.013-.156.03-.183.052-.064.024-.229.121-.103.07-.177.149-.08.086-.02.017-.154.184-.084.125-.099.2-.038.106-.052.178 1.444.201.122-1.021-.095-.004zM7.18 5.847l-.413-.411-.156-.138-.082-.059-.074-.043-.154-.073-.154-.052-.202-.041-.195-.005-.102.006-.132.018-.192.046-.091.031-.166.076-.106.063-.044.029-.036.023-.108.084-.089.082-.056.058-.07.086-.037.054-.047.07-.061.115-.015.037 4.346 1.028.014-.116-.002-.163-.024-.187-.04-.141-.077-.191-.086-.153-.095-.129-.097-.108-.15-.136L7.18 5.847zM4.829 9.461l-.022.02-.117.153-.089.140-.065.14-.042.133-.026.133-.009.117v.173l.022.16.029.12.058.167.07.142.118.18.087.107 4.163-.24-.055-.14-.015-.053-.017-.095-.008-.09-.001-.091.009-.097.013-.08.025-.111.01-.026.017-.056.029-.077.038-.08-4.193-1.031a.988.988 0 0 1-.01.078l-.023.139zM9.354 14.595l-.107-.08-4.177.237.179.2.04.04.086.078.092.07.1.065.169.09.141.055.167.042.182.023.178-.002.185-.025.188-.061.166-.076.102-.061.15-.104.092-.078.07-.072-1.803 3.012 3.122 2.16 1.262-5.338-.056-.024-.112-.032-.109-.019-.117-.007-.097.002-.108.007.003.001-.089.009-.075.009.004 0-.011.001-.007.001-.047.006z"/>
-                    </svg>
-                    <span>Continuar con Netlify</span>
-                </button>
+                
+                <p style="color: var(--color-text-muted); font-size: 0.75rem; margin-top: 1.5rem; text-align: center;">
+                    🔒 Solo usuarios autorizados pueden acceder
+                </p>
             </div>
         </div>
     </div>

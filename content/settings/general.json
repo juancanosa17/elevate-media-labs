@@ -1,8 +1,10 @@
 {
   "siteName": "Elevate Media Labs",
+  "tagline": "Estrategia & Data Intelligence",
   "siteDescription": "Estrategia & Data Intelligence. Transformamos datos en inteligencia accionable para marcas que buscan crecer con propósito.",
   "contactEmail": "hola@elevatemedialabs.com",
   "contactPhone": "",
-  "address": "Global · Remote First"
+  "address": "Global · Remote First",
+  "googleAnalyticsId": "",
+  "gtmId": "<!-- Google tag (gtag.js) --> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-CGY36VLHKD\"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());    gtag('config', 'G-CGY36VLHKD'); </script>"
 }
-
